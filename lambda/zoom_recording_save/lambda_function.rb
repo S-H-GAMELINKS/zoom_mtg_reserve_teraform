@@ -16,19 +16,23 @@ def lambda_handler(event:, context:)
     
     logger.info("Get Zoom Recording file download path")
     
-    region = 'us-east-2'
-    bucket_name = "zoom-recoding-bucket"
+    region = 'ap-northeast-1'
+    bucket_name = "zoom-recoding"
     
     s3_client = Aws::S3::Client.new(region: region)
     
     recording_files = body["payload"]["object"]["recording_files"]
-    meeting_id = body["payload"]["object"]["id"]
+    meeting_id = body["payload"]["object"]["uuid"]
     host_id = body["payload"]["object"]["host_id"]
     start_time = Time.parse(body["payload"]["object"]["start_time"])
     start_time += 9*60*60
     
     token = body["download_token"]
-    path = recording_files[0]["download_url"]
+    path = ""
+    
+    recording_files.each do |v|
+        path = v["download_url"] if v["file_type"] == "MP4"
+    end
     
     download_path = "#{path}?access_token=#{token}"
 
