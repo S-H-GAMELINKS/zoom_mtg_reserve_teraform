@@ -13,7 +13,7 @@ resource "aws_lambda_function" "zoom_recording_save" {
   role        = aws_iam_role.zoom_recording_save_role.arn
   runtime     = "ruby2.7"
   timeout     = 900
-  memory_size = 10240
+  memory_size = 4096
 }
 
 resource "aws_cloudwatch_log_group" "zoom_recording_save_log_group" {
