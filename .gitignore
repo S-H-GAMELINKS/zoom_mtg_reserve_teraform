@@ -1,4 +1,8 @@
-.terrfaform
+.terraform
 .terrfaform.*
 terrfaform.tfstate
 terrfaform.tfstate.buckup
+.terraform.lock.hcl
+lambda/upload
+terraform.tfstate
+terraform.tfstate.backup
